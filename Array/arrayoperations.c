@@ -107,7 +107,16 @@ void max_min(int *array, int n)
 	int max = array;
 	int min = array;
 
-	for()
+	for(int i = 0; i < n; i++)
+	{
+		if(max < array[i])
+			max = array[i];
+
+		if(min > array[i])
+			min = array[i];
+	}
+
+	printf("Max = %d\nMin = %d\n", max, min);
 }
 
 void duplicate(int *array, int n)
