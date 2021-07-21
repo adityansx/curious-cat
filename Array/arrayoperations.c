@@ -121,7 +121,34 @@ void max_min(int *array, int n)
 
 void duplicate(int *array, int n)
 {
-	
+	int new_array[n], count = 0;
+
+	printf("Array entered:\n");
+	for(int i = 0; i < n; i++)
+		printf("%d ", *(array + i));
+	printf("\n");
+
+	for(int i = 0; i < n; i++)
+	{
+		int j;
+
+		for(j = 0; j < count; j++)
+		{
+			if(array[i] == new_array[j])
+				break;
+		}
+
+		if(j == count)
+		{
+			new_array[count] = array[i];
+			count++;
+		}
+	}
+
+	printf("\nArray after removing duplicate elements:\n");
+	for(int i = 0; i < count; i++)
+		printf("%d ", *(new_array + i));
+	printf("\n\n");
 }
 
 void reverse(int *array, int n)
