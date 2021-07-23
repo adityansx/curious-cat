@@ -32,7 +32,7 @@ main()
 		switch(choice)
 		{
 			case 0:
-				system("exit");
+				exit(0);
 				break;
 			
 			case 1:
