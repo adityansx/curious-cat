@@ -1,9 +1,9 @@
-void print_even(int*, int);
-void print_odd(int*, int);
-void average(int*, int);
-void max_min(int*, int);
-void duplicate(int*, int);
-void reverse(int*, int); 
+void print_even(int*, int);//to print even valued elements in the entered array
+void print_odd(int*, int);//to print odd valued elements in the entered array
+void average(int*, int);//to print sum and average of the elements in the entered array
+void max_min(int*, int);//to print the largest and smallest element in the entered array
+void duplicate(int*, int);//to remove duplicate elements in the entered array
+void reverse(int*, int); // to print the array in reverse order
 
 main()
 {
@@ -142,22 +142,24 @@ void duplicate(int *array, int n)
 	{
 		int j;
 
-		for(j = 0; j < count; j++)
+		for(j = 0; j < count; j++)//j doesn't increase if a duplicate element is found
 		{
 			if(array[i] == new_array[j])
 				break;
 		}
+		/*the loop runs, and if there is a unique element, j becomes equal to count
+		If a duplicate element is found, the loop breaks and j remains smaller than count*/
 
-		if(j == count)
+		if(j == count)//a new element is added if j == count
 		{
 			new_array[count] = array[i];
-			count++;
+			count++;//count increases to accomodate a new unique element
 		}
 	}
 
 	printf("\nArray after removing duplicate elements:\n");
-	for(int i = 0; i < count; i++)
-		printf("%d ", *(new_array + i));
+	for(int i = 0; i < count; i++)//count will be equal to number of elements in the new_array
+		printf("%d ", *(new_array + i));//array name acts as a pointer to the first element of the array
 	printf("\n\n");
 }
 
