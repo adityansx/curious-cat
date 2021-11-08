@@ -1,2 +1,2 @@
 # curious-cat
-Programs I have written for practice purpose.
+Programs I have written for revision.
