@@ -20,5 +20,9 @@ main()
 	printf("Enter r: ");
 	scanf("%d", &r);
 
-	printf("The value of C(%d, %d) is %ld\n", n, r, fact(n) / (fact(r) * fact(n - r)));
+	if (n >= r)
+		printf("The value of C(%d, %d) is %ld\n", n, r, fact(n) / (fact(r) * fact(n - r)));
+
+	else printf("The value of n must be greater than that of r.\
+				\nExecute the program again and enter correct values.\n");
 }
