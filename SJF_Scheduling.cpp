@@ -5,9 +5,9 @@ class SJF: public FCFS {
     public:
         void sort() {
             bool swapped;
+            bool matchingElement = false;
             for(int i = 0; i < numOfProcesses - 1; i++) {
                 swapped = false;
-
                 for(int j = 0; j < numOfProcesses - i - 1; j++) {
                     if(*(burstTime + j) > *(burstTime + j + 1)) {
                         int temp_1 = *(arrivalTime + j);
@@ -21,29 +21,31 @@ class SJF: public FCFS {
                         swapped = true;
                     }
                 }
-
+                if(*(burstTime) == *(burstTime + i))
+                    matchingElement = true;
                 if(!swapped)
                     break;
             }
-            for(int i = 0; i < numOfProcesses - 1; i++) {
-                swapped = false;
+            if(matchingElement) {
+                for(int i = 0; i < numOfProcesses - 1; i++) {
+                    swapped = false;
 
-                for(int j = 0; j < numOfProcesses - i - 1; j++) {
-                    if(*(arrivalTime + j) > *(arrivalTime + j + 1)) {
-                        int temp_1 = *(burstTime + j);
-                        int temp_2 = *(arrivalTime + j);
+                    for(int j = 0; j < numOfProcesses - i - 1; j++) {
+                        if(*(arrivalTime + j) > *(arrivalTime + j + 1)) {
+                            int temp_1 = *(burstTime + j);
+                            int temp_2 = *(arrivalTime + j);
 
-                        *(burstTime + j) = *(burstTime + j + 1);
-                        *(burstTime + j + 1) = temp_1;
+                            *(burstTime + j) = *(burstTime + j + 1);
+                            *(burstTime + j + 1) = temp_1;
 
-                        *(arrivalTime + j) = *(arrivalTime + j + 1);
-                        *(arrivalTime + j + 1) = temp_2;
-                        swapped = true;
+                            *(arrivalTime + j) = *(arrivalTime + j + 1);
+                            *(arrivalTime + j + 1) = temp_2;
+                            swapped = true;
+                        }
                     }
+                    if(!swapped)
+                        break;
                 }
-
-                if(!swapped)
-                    break;
             }
         }
 
