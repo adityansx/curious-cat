@@ -1,5 +1,5 @@
 #include <iostream>
-#include "FCFS.h"
+#include "FCFS_copy.h"
 
 int main() {
     FCFS obj1;

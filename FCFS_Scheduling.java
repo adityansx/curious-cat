@@ -5,11 +5,11 @@ class FCFS {
     Scanner sc = new Scanner(System.in);
 
     int numOfProcesses;
-    int[] arrivalTime = new int[numOfProcesses];
-    int[] burstTime = new int[numOfProcesses];
-    int[] turnAroundTime = new int[numOfProcesses];
-    int[] waitingTime = new int[numOfProcesses];
-    int[] completionTime = new int[numOfProcesses];
+    int[] arrivalTime;
+    int[] burstTime;
+    int[] turnAroundTime;
+    int[] waitingTime;
+    int[] completionTime;
     float avgWaitingTime = 0f;
     float avgTurnAroundTime = 0f;
 
@@ -28,30 +28,36 @@ class FCFS {
     // completionTime[0] = 0;
     void calculate() {
         for(int i = 0; i < numOfProcesses; i++) {
-            if(i == 0) {
-                this.waitingTime[i] = 0;
-                this.completionTime[i] = this.arrivalTime[i] + this.burstTime[i];
-                this.turnAroundTime[i] = this.waitingTime[i] + this.burstTime[i];
-            } else {
-                this.waitingTime[i] = this.completionTime[i - 1] - this.arrivalTime[i];
+            waitingTime[i] = 0;
+            turnAroundTime[i] = 0;
 
-                if(this.waitingTime[i] < 0) this.waitingTime[i] = 0;
-
-                this.completionTime[i] = this.arrivalTime[i] + this.waitingTime[i] + this.burstTime[i];
-                turnAroundTime[i] = waitingTime[i] + this.burstTime[i];
-            }
+            waitingTime[i] = completionTime[i] - arrivalTime[i];
+            if(waitingTime[i] < 0) 
+                waitingTime[i] = 0;
+            completionTime[i + 1] = arrivalTime[i] + burstTime[i] + waitingTime[i];
+            turnAroundTime[i] = waitingTime[i] + burstTime[i];
 
             this.avgWaitingTime += (float) this.waitingTime[i];
             this.avgTurnAroundTime += (float) this.turnAroundTime[i];
-        }
 
-        this.avgWaitingTime /= (float) this.numOfProcesses;
-        this.avgTurnAroundTime /= (float) this.numOfProcesses;
+        }
+        avgWaitingTime /= (float) numOfProcesses;
+        avgTurnAroundTime /= (float) numOfProcesses;
     }
+    
 
     FCFS() {
         System.out.print("Enter the number of processes: ");
         this.numOfProcesses = sc.nextInt();
+
+        arrivalTime = new int[numOfProcesses];
+        burstTime = new int[numOfProcesses];
+        turnAroundTime = new int[numOfProcesses];
+        waitingTime = new int[numOfProcesses];
+        completionTime = new int[numOfProcesses + 1];
+
+        completionTime[0] = 0;
+
         System.out.println();
     }
 }
@@ -65,9 +71,10 @@ public class FCFS_Scheduling {
             obj1.calculate();
 
             for(int i = 0; i < obj1.numOfProcesses; i++) {
-                System.out.println("Completion Time for Process " + (i + 1) + ": " + obj1.completionTime[i]);
+                System.out.println("Completion Time for Process " + (i + 1) + ": " + obj1.completionTime[i + 1]);
                 System.out.println("Turn Around Time for Process " + (i + 1) + ": " + obj1.turnAroundTime[i]);
                 System.out.println("Waiting Time for Process " + (i + 1) + ": " + obj1.waitingTime[i]);
+                System.out.println();
             }
 
             System.out.println();
