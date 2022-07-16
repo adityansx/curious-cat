@@ -5,7 +5,8 @@ public class RoundRobin {
     int timeQuantum;
     int sumOfQuantum = 0;
     int temp;
-    int count = 0;
+    int count;
+    Boolean b = true;
     int[] burstTime, waitingTime, turnAroundTime, remainingTime;
     private static final Scanner sc = new Scanner(System.in);
 
@@ -17,11 +18,16 @@ public class RoundRobin {
     }
 
     void calculate() {
-        while(count != numOfProcesses) {
-            for(int i = 0; i < numOfProcesses; i++) {
+        
+        while(true) {
+         
+            int i;
+            for( i = 0,count=0; i < numOfProcesses; i++) {
                 if(remainingTime[i] == 0) {
                     count++;
+                    // System.out.println("Count: " + count);
                     continue;
+
                 }
                 temp = timeQuantum;
                 if(remainingTime[i] > timeQuantum) {
@@ -36,6 +42,18 @@ public class RoundRobin {
                 // System.out.println((i + 1) + "\t\t" + burstTime[i]+ "\t\t" + remainingTime[i]);
                 // System.out.println("-----------------------------------------------------");
                 // System.out.println("Current Time: " + sumOfQuantum + "\n" + "Loop Iteration " + i + "\n" + "Count: " + count);
+
+            }
+
+            System.out.println(count);
+            System.out.println(numOfProcesses);
+            if(count == numOfProcesses) 
+                
+            {
+                System.out.println("hello");
+                break;
+
+
             }
         }
         for (int i = 0; i < numOfProcesses; i++) {
